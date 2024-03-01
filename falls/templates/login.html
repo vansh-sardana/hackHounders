@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <script>
+        function togglePassword(inputId) {
+            const passwordInput = document.getElementById(inputId);
+            passwordInput.type = (passwordInput.type === 'password') ? 'text' : 'password';
+        }
+        </script>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+</head>
+
+<body>
+    <div class='flex max-w-[1160px] gap-x-12 w-11/12 m-auto py-12 justify-between'>
+        <div class='w-11/12 max-w-[450px]'>
+
+            <h2 class="font-semibold text-[1.875rem] leading-[2.375rem]">Login</h2>
+            <form method="post" action="{% url 'login' %}">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <button type="submit">Login</button>
+            </form>
+            <p>Don't have an account? <a href="{% url 'signup' %}">Sign up here</a>.</p>
+            <form method="post">
+                {% csrf_token %}
+                {{ form.username }}
+                {{ form.password }}
+                <button type="button" onclick="togglePassword('id_password')">Toggle Password</button>
+                <button type="submit">Log in</button>
+            </form>
+        </div>
+        <div class='relative w-11/12 max-w-[450px]'>
+            <img src={frame} alt="" width="555px" loading='lazy' />
+            <img src={formType==="signup" ?signup:login} alt="" width="555px" loading='lazy'
+                class='absolute -top-4 -left-4 z-10' />
+        </div>
+
+    </div>
+
+</body>
+
+</html>

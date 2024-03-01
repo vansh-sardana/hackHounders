@@ -1,17 +1,69 @@
 <!-- falls/templates/falls/home.html -->
 <!DOCTYPE html>
 <html lang="en">
+    
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Fall Detection Home</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    
 </head>
 <body>
-    <h1>Fall Detection Information</h1>
-    <p>Time: {{ fall_data.time }}</p>
-    <p>Location: {{ fall_data.location }}</p>
-    <p>Date: {{ fall_data.date }}</p>
-    <p>Heartbeat: {{ fall_data.heartbeat }}</p>
+    <div class=" w-100vw relative min-h-[100vh] overflow-x-hidden">
+        <nav class="bg-[#02042a] flex ">
+            <div class="relative w-[1120px] mx-auto flex items-center justify-between font-mullish">
+                <a href="/" class="cursor-pointer py-7 pr-7">
+                    <img src="assets/logo.png" alt="" class="w-[125px] h-[30px]">
+                </a>
+                <ul class="flex justify-between gap-6">
+                    <li class="text-white relative cursor-pointer group transition-all duration-200 group hover:text-[#2b84ea]">
+                        <a href="#" class=" block py-8">Emergency Contacts</a>
+                        <div class="absolute bottom-0 w-[100%] h-1 bg-[#2b84ea] hidden group-hover:block"></div>
+                    </li>
+                    <li class="text-white relative cursor-pointer group transition-all duration-200 group hover:text-[#2b84ea]">
+                        <a href="#" class=" block py-8">Nearby Hospitals</a>
+                        <div class="absolute bottom-0 w-[100%] h-1 bg-[#2b84ea] hidden group-hover:block"></div>
+                    </li>
+                    
+                </ul>
+                <div class="flex gap-5 text-white">
+                    <button class="border-[#4b94ed] py-[12px] px-[20px] border rounded-sm text-sm font-bold">
+                        <a href="{% url 'login' %}" >Log In</a>
+                        
+                    </button>
+                    <button class="py-[12px] px-4 border-[#4b94ed] border rounded-sm bg-white text-sm text-[#2b84ea] font-bold hover:text-[#0b72e7]">
+
+                        <a href="{% url 'signup' %}" >
+                            Sign Up &rarr;
+                        </a>
+                    </button>
+                </div>
+            </div>
+        </nav>
+        <main class="relative w-11/12 max-w-[1080px] mx-auto pt-4 font-mullish top-[-1rem]">
+
+            <h1 class="text-4xl text-center leading-[1.2] font-extrabold mt-4 uppercase ">CareTrack</h1>
+            <div class="w-20 h-1 bg-green-400 mx-auto mt-4 mb-6"></div>
+            <h2 class="text-center text-xl font-mullish">Here are the details of the last fall Detection</h2>
+            <div class="flex flex-col gap-5 text-xl">
+                <p class="leading-[1.2rem]">Time: {{ fall_data.time }}</p>
+                <p class="leading-[1.2rem]">Location: {{ fall_data.location }}</p>
+                <p class="leading-[1.2rem]">Date: {{ fall_data.date }}</p>
+                <p class="leading-[1.2rem]">Heartbeat: {{ fall_data.heartbeat }}</p>
+            </div>
+            <button >Report False Detection</button>
+        </main>
+        </div>
+
+        <form method="post">
+            {% csrf_token %}
+            {{ form.username }}
+            {{ form.password1 }}
+            {{ form.password2 }}
+            <button type="button" onclick="togglePassword('id_password1')">Toggle Password</button>
+            <button type="submit">Sign up</button>
+        </form>
 </body>
 </html>
 
