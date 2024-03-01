@@ -3,9 +3,12 @@
 # falls/views.py
 # falls/views.py
 from django.shortcuts import render
+from django.utils.timezone import now
 import time
 import serial
 from django.shortcuts import render
+
+from django.utils import timezone
 
 
 def read_serial_data():
@@ -24,12 +27,14 @@ def parse_serial_data(serial_data):
     # Example: "Time: 01:32, Latitude: 28.247627, Longitude: 76.813499, Heartbeat: 103"
     data_parts = serial_data.split(',')
     fall_data = {}
+
     for part in data_parts:
         print(part)
         if ': ' in part:
             key, value = part.split(':', 1)
             fall_data[key.lower()] = value
-
+    fall_data['time']= timezone.localtime(timezone.now()).strftime("%H:%M")
+    fall_data['date']=timezone.localtime(timezone.now()).date()
     return fall_data
 
 

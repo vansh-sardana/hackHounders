@@ -47,23 +47,31 @@
                 </div>
             </div>
         </nav>
-        <main class="relative w-11/12 max-w-[1080px] mx-auto pt-4 font-mullish top-[-1rem]">
+        <main class="relative w-11/12 max-w-[1080px] mx-auto pt-4 font-mullish top-[-1rem] flex flex-col items-center">
 
-            <h1 class="text-4xl text-center leading-[1.2] font-extrabold mt-4 uppercase ">CareTrack</h1>
+            <h1 class="text-4xl text-center leading-[1.2] font-extrabold mt-4 uppercase">CareTracker</h1>
             <div class="w-20 h-1 bg-green-400 mx-auto mt-4 mb-6"></div>
-            <h2 class="text-center text-xl font-mullish">Here are the details of the last fall Detection</h2>
-            <div class="flex flex-col gap-5 text-xl">
+            <h2 class="text-center text-xl font-mullish">Here are the details of the last fall detected</h2>
+            
+            <div class="flex flex-col gap-5 text-2xl justify-center items-center">
                 <p class="leading-[1.2rem]">Time: {{ fall_data.time }}</p>
-                <p class="leading-[1.2rem]">Location: {{ fall_data.latitude }}</p>
-                <p class="leading-[1.2rem]">Location: {{ fall_data.longitude }}</p>
-                <p>
-                    <a href="https://www.google.com/maps?q={{fall_data.latitude}},{{fall_data.longitude}}">Gmap</a>
-                </p>
                 <p class="leading-[1.2rem]">Date: {{ fall_data.date }}</p>
-                <p class="leading-[1.2rem]">Heartbeat: {{ fall_data.heartbeat }}</p>
+                <p class="leading-[1.2rem]">Heartbeat measured: {{ fall_data.heartbeat }}</p>
+
+                    <p class="leading-[1.2rem]">Latitude: {{ fall_data.latitude }}</p>
+                    <p class="leading-[1.2rem]">Longitude: {{ fall_data.longitude }}</p>
+
+        
+                <p>
+                    <a href="https://www.google.com/maps?q={{fall_data.latitude}},{{fall_data.longitude}}"
+                    class="border-[#4b94ed] py-[12px] px-[20px] border rounded-lg text-sm font-bold text-white bg-[#02042a]">Google Map Link</a>
+                </p>
+        
+                <button class="bg-blue-500 text-white px-4 py-2 rounded-lg mt-4 text-sm">Report False Detection</button>
             </div>
-            <button >Report False Detection</button>
+        
         </main>
+        
         </div>
 
         <form method="post">
