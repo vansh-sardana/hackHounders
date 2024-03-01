@@ -33,11 +33,11 @@
                 {{ form.password }}
                 <button type="button" onclick="togglePassword('id_password')">Toggle Password</button>
                 <button type="submit">Log in</button>
+                <button class='bg-blue-400 flex justify-center items-center border border-white border-opacity-25 w-full rounded-md font-medium mt-6 px-3 py-2 gap-3 opacity-65'><p>Sign in with Google</p></button>
             </form>
         </div>
         <div class='relative w-11/12 max-w-[450px]'>
-            <img src={frame} alt="" width="555px" loading='lazy' />
-            <img src={formType==="signup" ?signup:login} alt="" width="555px" loading='lazy'
+            <img alt="" width="555px" loading='lazy'
                 class='absolute -top-4 -left-4 z-10' />
         </div>
 
