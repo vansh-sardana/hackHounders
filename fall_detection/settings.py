@@ -37,7 +37,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'falls'
+    'falls',
+    'django_password_eye',
 ]
 ROOT_URLCONF = "first_project.urls"
 MIDDLEWARE = [
