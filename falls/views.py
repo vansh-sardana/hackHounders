@@ -3,17 +3,48 @@
 # falls/views.py
 # falls/views.py
 from django.shortcuts import render
+import time
+import serial
+from django.shortcuts import render
+
+
+def read_serial_data():
+    # Replace 'COMx' with your Arduino's serial port
+    ser = serial.Serial('COM5', 9600)
+    # Wait for Arduino to initialize
+    time.sleep(2)
+    # Read data from the serial port
+    data = ser.readline().decode('utf-8').strip()
+    # Close the serial port
+    ser.close()
+    return data
+
+def parse_serial_data(serial_data):
+    # Parse the serial data and return a dictionary
+    # Example: "Time: 01:32, Latitude: 28.247627, Longitude: 76.813499, Heartbeat: 103"
+    data_parts = serial_data.split(',')
+    fall_data = {}
+    for part in data_parts:
+        print(part)
+        if ': ' in part:
+            key, value = part.split(':', 1)
+            fall_data[key.lower()] = value
+
+    return fall_data
+
+
 
 def home(request):
-    # Sample data, replace this with the actual data from your fall detection system
-    fall_data = {
-        'time': '5:30',
-        'location': 'BMN Munjal University',
-        'date': '1 March',
-        'heartbeat': 90,
-    }
+    # Read real-time data from Arduino
+    serial_data = read_serial_data()
+    print(f"Serial Data: {serial_data}")
+    # Parse the serial data
+    fall_data = parse_serial_data(serial_data)
+    print(f"Fall Data: {fall_data}")
+    print(3)
 
     return render(request, 'home.html', {'fall_data': fall_data})
+
 
 
 # falls/views.py

@@ -7,42 +7,62 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login</title>
-    <script>
-        function togglePassword(inputId) {
-            const passwordInput = document.getElementById(inputId);
-            passwordInput.type = (passwordInput.type === 'password') ? 'text' : 'password';
-        }
-        </script>
+    
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
 </head>
+
+<!-- ... (previous code) ... -->
+
+<!-- ... (previous code) ... -->
+
+<!-- ... (previous code) ... -->
+
+<!-- ... (previous code) ... -->
 
 <body>
     <div class='flex max-w-[1160px] gap-x-12 w-11/12 m-auto py-12 justify-between'>
         <div class='w-11/12 max-w-[450px]'>
-
             <h2 class="font-semibold text-[1.875rem] leading-[2.375rem]">Login</h2>
             <form method="post" action="{% url 'login' %}">
                 {% csrf_token %}
-                {{ form.as_p }}
+                <div class="relative">
+                    <!-- Password field -->
+                    Password: <input type="password" value="FakePSW" id="id_password" name="password" class="border p-2 w-full">
+
+                    <!-- Eye icon to toggle between password visibility -->
+                    <span class="absolute top-1/2 -translate-y-1/2 right-2 cursor-pointer" onclick="togglePassword('id_password')">
+                        <i class="fa fa-eye text-gray-500"></i>
+                    </span>
+                </div>
                 <button type="submit">Login</button>
             </form>
             <p>Don't have an account? <a href="{% url 'signup' %}">Sign up here</a>.</p>
-            <form method="post">
-                {% csrf_token %}
-                {{ form.username }}
-                {{ form.password }}
-                <button type="button" onclick="togglePassword('id_password')">Toggle Password</button>
-                <button type="submit">Log in</button>
-                <button class='bg-blue-400 flex justify-center items-center border border-white border-opacity-25 w-full rounded-md font-medium mt-6 px-3 py-2 gap-3 opacity-65'><p>Sign in with Google</p></button>
-            </form>
+            <button class='bg-blue-400 flex justify-center items-center border border-white border-opacity-25 w-full rounded-md font-medium mt-6 px-3 py-2 gap-3 opacity-65'>
+                <p>Sign in with Google</p>
+            </button>
         </div>
         <div class='relative w-11/12 max-w-[450px]'>
-            <img alt="" width="555px" loading='lazy'
-                class='absolute -top-4 -left-4 z-10' />
+            <img alt="" width="555px" loading='lazy' class='absolute -top-4 -left-4 z-10' />
         </div>
-
     </div>
 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/js/all.min.js" crossorigin="anonymous"></script>
+    <script>
+        function togglePassword(inputId) {
+            var x = document.getElementById(inputId);
+            if (x.type === "password") {
+                x.type = "text";
+            } else {
+                x.type = "password";
+            }
+        }
+    </script>
 </body>
 
-</html>
+<!-- ... (remaining code) ... -->
+
+
+
+<!-- ... (remaining code) ... -->
+
+</html> 
