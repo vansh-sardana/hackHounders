@@ -11,31 +11,55 @@
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
 </head>
 
-<body>
-    <div class='flex max-w-[1160px] gap-x-12 w-11/12 m-auto py-12 justify-between'>
-        <div class='w-11/12 max-w-[450px]'>
-            <h2 class="font-semibold text-[1.875rem] leading-[2.375rem]">Login</h2>
-            <form method="post" action="{% url 'login' %}">
+<body class="bg-gray-100 font-sans">
+
+    <div class='flex max-w-[1160px] gap-x-12 w-11/12 m-auto py-12 justify-between items-center'>
+
+        <div class='w-11/12 max-w-[450px] bg-white p-8 rounded-lg shadow-md'>
+
+            <h2 class="text-3xl font-semibold text-[#02042a] mb-6">Login</h2>
+
+            <form method="post" action="{% url 'login' %}" class="space-y-4">
                 {% csrf_token %}
-                <div class="relative">
+
+                <div class="mb-4">
+                    <label for="id_email" class="sr-only">Email</label>
+                    <!-- Email field -->
+                    <input type="text" id="id_email" name="email" placeholder="Email"
+                           class="border border-gray-300 p-3 w-full rounded focus:outline-none focus:border-blue-500">
+                </div>
+
+                <div class="relative mb-4">
+                    <label for="id_password" class="sr-only">Password</label>
                     <!-- Password field -->
-                    Password: <input type="password" value="FakePSW" id="id_password" name="password" class="border p-2 w-full">
+                    <input type="password" value="FakePSW" id="id_password" name="password" placeholder="Password"
+                           class="border border-gray-300 p-3 w-full rounded focus:outline-none focus:border-blue-500">
 
                     <!-- Eye icon to toggle between password visibility -->
-                    <span class="absolute top-1/2 -translate-y-1/2 right-2 cursor-pointer" onclick="togglePassword('id_password')">
-                        <i class="fa fa-eye text-gray-500"></i>
+                    <span class="absolute top-1/2 -translate-y-1/2 right-4 cursor-pointer"
+                          onclick="togglePassword('id_password')">
+                        <i class="fas fa-eye text-gray-500"></i>
                     </span>
                 </div>
-                <button type="submit">Login</button>
+
+                <button type="submit"
+                        class=" bg-blue-500 text-white py-2 px-4 rounded-full hover:bg-[#2b84ea] transition duration-300">
+                    Sign In
+                </button>
             </form>
-            <p>Don't have an account? <a href="{% url 'signup' %}">Sign up here</a>.</p>
-            <button class='bg-blue-400 flex justify-center items-center border border-white border-opacity-25 w-full rounded-md font-medium mt-6 px-3 py-2 gap-3 opacity-65'>
+
+            <p class="mt-4 text-[#02042a]">Don't have an account? <a href="{% url 'signup' %}"
+                                                                       class="text-blue-500">Sign up here</a>.</p>
+
+            <button class=' bg-blue-500 flex justify-center items-center border border-white border-opacity-25 w-full rounded-md font-medium mt-6 px-3 py-2 gap-3 opacity-65'>
                 <p>Sign in with Google</p>
             </button>
         </div>
+
         <div class='relative w-11/12 max-w-[450px]'>
-            <img alt="" width="555px" loading='lazy' class='absolute -top-4 -left-4 z-10' />
+            <img alt="" width="555px" loading='lazy' class='absolute -top-4 -left-4 z-10'/>
         </div>
+
     </div>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/js/all.min.js" crossorigin="anonymous"></script>
@@ -49,7 +73,9 @@
             }
         }
     </script>
+
 </body>
+
 
 <!-- ... (remaining code) ... -->
 

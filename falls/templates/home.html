@@ -1,6 +1,7 @@
 <!-- falls/templates/falls/home.html -->
 <!DOCTYPE html>
 <html lang="en">
+    {% load static %}
     
 <head>
     <meta charset="UTF-8">
@@ -24,7 +25,9 @@
                 </div>
                 <ul class="flex justify-between gap-6">
                     <li class="text-white relative cursor-pointer group transition-all duration-200 group hover:text-[#2b84ea]">
-                        <a href="#" class=" block py-8">Emergency Contacts</a>
+                        <button class="bg-blue-500 text-white px-4 py-2 rounded-lg mt-4 text-sm">
+                            <a href="{% url 'emergency_contacts' %}">Emergency Contacts</a>
+                          </button>
                         <div class="absolute bottom-0 w-[100%] h-1 bg-[#2b84ea] hidden group-hover:block"></div>
                     </li>
                     <li class="text-white relative cursor-pointer group transition-all duration-200 group hover:text-[#2b84ea]">
@@ -51,24 +54,27 @@
 
             <h1 class="text-4xl text-center leading-[1.2] font-extrabold mt-4 uppercase">CareTracker</h1>
             <div class="w-20 h-1 bg-green-400 mx-auto mt-4 mb-6"></div>
-            <h2 class="text-center text-xl font-mullish">Here are the details of the last fall detected</h2>
+            <h2 class="text-center text-3xl font-bold mt-8 mb-4 text-[#02042a]">Fall Detection Details</h2>
+
+            <div class="flex flex-col gap-8 text-lg justify-center items-center p-6 bg-white rounded-lg shadow-md">
+                <p class="leading-[1.5rem]"><span class="font-semibold">Time:</span> {{ fall_data.time }}</p>
+                <p class="leading-[1.5rem]"><span class="font-semibold">Date:</span> {{ fall_data.date }}</p>
+                <p class="leading-[1.5rem]"><span class="font-semibold">Heartbeat measured:</span> {{ fall_data.heartbeat }}</p>
             
-            <div class="flex flex-col gap-5 text-2xl justify-center items-center">
-                <p class="leading-[1.2rem]">Time: {{ fall_data.time }}</p>
-                <p class="leading-[1.2rem]">Date: {{ fall_data.date }}</p>
-                <p class="leading-[1.2rem]">Heartbeat measured: {{ fall_data.heartbeat }}</p>
-
-                    <p class="leading-[1.2rem]">Latitude: {{ fall_data.latitude }}</p>
-                    <p class="leading-[1.2rem]">Longitude: {{ fall_data.longitude }}</p>
-
-        
-                <p>
-                    <a href="https://www.google.com/maps?q={{fall_data.latitude}},{{fall_data.longitude}}"
-                    class="border-[#4b94ed] py-[12px] px-[20px] border rounded-lg text-sm font-bold text-white bg-[#02042a]">Google Map Link</a>
-                </p>
-        
+                <div class="flex gap-2">
+                    <p class="leading-[1.5rem]"><span class="font-semibold">Latitude:</span> {{ fall_data.latitude }}</p>
+                    <p class="leading-[1.5rem]"><span class="font-semibold">Longitude:</span> {{ fall_data.longitude }}</p>
+                </div>
+            
+                <a href="https://www.google.com/maps?q={{fall_data.latitude}},{{fall_data.longitude}}"
+                   class="border-[#4b94ed] py-2 px-6 border rounded-full text-sm font-bold text-white bg-[#02042a] hover:bg-[#2b84ea] transition duration-300 mt-4 inline-block">
+                    View on Map
+                </a>
+            
                 <button class="bg-blue-500 text-white px-4 py-2 rounded-lg mt-4 text-sm">Report False Detection</button>
             </div>
+            
+
         
         </main>
         

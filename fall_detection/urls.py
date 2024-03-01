@@ -21,7 +21,7 @@ from falls import views
 
 from django.contrib import admin
 from django.urls import include, path
-
+from falls.views import emergency_contacts, add_emergency_contact, update_emergency_contact, delete_emergency_contact
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('',views.home,name='home'),
@@ -29,6 +29,10 @@ urlpatterns = [
     path('login/', views.user_login, name='login'),
     
     path('falls/', include('falls.urls')),
+     path('emergency-contacts/', emergency_contacts, name='emergency_contacts'),
+    path('add-emergency-contact/', add_emergency_contact, name='add_emergency_contact'),
+    path('update-emergency-contact/<int:pk>/', update_emergency_contact, name='update_emergency_contact'),
+    path('delete-emergency-contact/<int:pk>/', delete_emergency_contact, name='delete_emergency_contact'),
 ]
 
 
