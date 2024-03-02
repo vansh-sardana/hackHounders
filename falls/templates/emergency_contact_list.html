@@ -6,23 +6,72 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Emergency Contacts</title>
+    <script src="https://cdn.tailwindcss.com"></script>
     
 </head>
 
 <body>
-    <h2>Emergency Contacts</h2>
+    <div class=" w-100vw relative min-h-[100vh] overflow-x-hidden bg-gray-200">
+        <nav class="bg-[#02042a] flex">
+            <div class="relative w-[1120px] mx-auto flex items-center justify-between font-mullish">
+                
+                <div class="flex">
+                    <a href="{% url 'home' %}" class="cursor-pointer py-7 pr-7">
+                        <img src="../static/logo.png" alt="" class="w-[38px] h-[30px]">
+                    </a>
+                    <a href="{% url 'home' %}" class="cursor-pointer py-7 pr-7">
+                        <img src="../static/caretracker.png" alt="" class="w-[218px] h-[30px]">
+                    </a>
+                </div>
+                <ul class="flex justify-between gap-6 h-[100%]">
+                    <li class="text-white relative cursor-pointer group transition-all duration-200 group hover:text-[#2b84ea] flex flex-col justify-center h-[100%]">
+                        
+                        <a href="{% url 'emergency_contacts' %}">Emergency Contacts</a>
+                        <div class="absolute bottom-0 w-[100%] h-1 bg-[#2b84ea] hidden group-hover:block"></div>
+                    </li>
+                    <li class="text-white relative cursor-pointer group transition-all duration-200 group hover:text-[#2b84ea] flex flex-col justify-center h-[100%]">
+                        <a href="{% url 'nearby_hospitals' %}">Nearby Hospitals</a>
+                        <div class="absolute bottom-0 w-[100%] h-1 bg-[#2b84ea] hidden group-hover:block"></div>
+                    </li>
+                    
+                </ul>
+                <div class="flex gap-5 text-white">
+                    {% if user.is_authenticated %}
+                    <p>Welcome, {{ user.username }}! You are now logged in.</p>
+                    {% else %}
+                    <button class="border-[#4b94ed] py-[12px] px-[20px] border rounded-sm text-sm font-bold">
+                        <a href="{% url 'login' %}">Log In</a>
 
-    <ul>
-        {% for contact in contacts %}
-        <li>
-            {{ contact.name }} - {{ contact.phone }}
-            <a href="{% url 'update_emergency_contact' pk=contact.pk %}">Edit</a>
-            <a href="{% url 'delete_emergency_contact' pk=contact.pk %}">Delete</a>
-        </li>
-        {% endfor %}
-    </ul>
+                    </button>
+                    <button
+                        class="py-[12px] px-4 border-[#4b94ed] border rounded-sm bg-white text-sm text-[#2b84ea] font-bold hover:text-[#0b72e7]">
 
-    <a href="{% url 'add_emergency_contact' %}">Add New Contact</a>
+                        <a href="{% url 'signup' %}">
+                            Sign Up &rarr;
+                        </a>
+                    </button>
+                    {% endif %}
+                </div>
+            </div>
+        </nav>
+        <div class="p-4 rounded shadow-md flex flex-col grow items-center">
+            
+            <h2 class="text-2xl font-bold mb-4 uppercase">Emergency Contacts</h2>
+            
+            <ul class="list-disc pl-4">
+                {% for contact in contacts %}
+                <li class="mb-2">
+                    <span class="font-semibold">{{ contact.name }} - {{ contact.phone }}</span>
+                    <a href="{% url 'update_emergency_contact' pk=contact.pk %}" class="text-blue-500 ml-2">Edit</a>
+                    <a href="{% url 'delete_emergency_contact' pk=contact.pk %}" class="text-red-500 ml-2">Delete</a>
+                </li>
+                {% endfor %}
+            </ul>
+            
+            <a href="{% url 'add_emergency_contact' %}" class="mt-4 bg-blue-500 text-white py-2 px-4 rounded w-[195px] text-center">Add New Contact</a>
+        </div>
+        
+    </div>
 </body>
 
 </html>

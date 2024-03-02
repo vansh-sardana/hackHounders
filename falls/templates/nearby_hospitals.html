@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nearby Hospitals</title>
+    <!-- Include Leaflet CSS and JS files -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+    <style>
+        #map {
+            height: 400px;
+        }
+    </style>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body>
+    <div class=" w-100vw relative min-h-[100vh] overflow-x-hidden">
+        <nav class="bg-[#02042a] flex">
+            <div class="relative w-[1120px] mx-auto flex items-center justify-between font-mullish">
+                
+                <div class="flex">
+                    <a href="{% url 'home' %}" class="cursor-pointer py-7 pr-7">
+                        <img src="../static/logo.png" alt="" class="w-[38px] h-[30px]">
+                    </a>
+                    <a href="{% url 'home' %}" class="cursor-pointer py-7 pr-7">
+                        <img src="../static/caretracker.png" alt="" class="w-[218px] h-[30px]">
+                    </a>
+                </div>
+                <ul class="flex justify-between gap-6 h-[100%]">
+                    <li class="text-white relative cursor-pointer group transition-all duration-200 group hover:text-[#2b84ea] flex flex-col justify-center h-[100%]">
+                        
+                        <a href="{% url 'emergency_contacts' %}">Emergency Contacts</a>
+                        <div class="absolute bottom-0 w-[100%] h-1 bg-[#2b84ea] hidden group-hover:block"></div>
+                    </li>
+                    <li class="text-white relative cursor-pointer group transition-all duration-200 group hover:text-[#2b84ea] flex flex-col justify-center h-[100%]">
+                        <a href="{% url 'nearby_hospitals' %}">Nearby Hospitals</a>
+                        <div class="absolute bottom-0 w-[100%] h-1 bg-[#2b84ea] hidden group-hover:block"></div>
+                    </li>
+                    
+                </ul>
+                <div class="flex gap-5 text-white">
+                    <button class="border-[#4b94ed] py-[12px] px-[20px] border rounded-sm text-sm font-bold">
+                        <a href="{% url 'login' %}" >Log In</a>
+                        
+                    </button>
+                    <button class="py-[12px] px-4 border-[#4b94ed] border rounded-sm bg-white text-sm text-[#2b84ea] font-bold hover:text-[#0b72e7]">
+
+                        <a href="{% url 'signup' %}" >
+                            Sign Up &rarr;
+                        </a>
+                    </button>
+                </div>
+            </div>
+        </nav>
+        <h2 class="mt-8 text-2xl font-bold mb-4 text-center">Nearby Hospitals</h2>
+<div class="mt-8 flex justify-around items-center">
+    <div class="w-64 mb-6 bg-white border border-gray-200 rounded-lg shadow-md p-4">
+        <h3 class="text-xl font-semibold mb-2">Medanta The Medicity</h3>
+        <p class="text-gray-600 mb-1">Gurgaon Sector 38, Gurgaon</p>
+        <div class="flex items-center">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"
+                class="h-5 w-5 text-blue-500 mr-1">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    d="M12 10v7m0 0-3-3m3 3 3-3zm7-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+            </svg>
+            <p class="text-blue-500">0779 566 6852</p>
+        </div>
+    </div>
+
+    <div class="w-64 mb-6 bg-white border border-gray-200 rounded-lg shadow-md p-4">
+        <h3 class="text-xl font-semibold mb-2">Fortis Memorial Research Institute</h3>
+        <p class="text-gray-600 mb-1">Gurgaon Sector 44, Gurgaon</p>
+        <div class="flex items-center">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"
+                class="h-5 w-5 text-blue-500 mr-1">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    d="M12 10v7m0 0-3-3m3 3 3-3zm7-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+            </svg>
+            <p class="text-blue-500">0738 305 8112</p>
+        </div>
+    </div>
+
+    <div class="w-64 mb-6 bg-white border border-gray-200 rounded-lg shadow-md p-4">
+        <h3 class="text-xl font-semibold mb-2">Rathore IMT Hospital Trauma Centre</h3>
+        <p class="text-gray-600 mb-1">IMT Manesar, Gurgaon</p>
+        <div class="flex items-center">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"
+                class="h-5 w-5 text-blue-500 mr-1">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    d="M12 10v7m0 0-3-3m3 3 3-3zm7-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+            </svg>
+            <p class="text-blue-500">0779 566 8183</p>
+        </div>
+    </div>
+</div>
+
+        
+        
+    </div>
+    <!-- Container for the map -->
+    <!-- <div id="map"></div>
+
+    <script>
+        // Initialize the map
+        var map = L.map('map').setView([{{ fall_data.latitude }}, {{ fall_data.longitude }}], 12);
+
+        // Add OpenStreetMap tile layer
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '© OpenStreetMap contributors'
+        }).addTo(map);
+
+        // Add a marker for the user's location
+        L.marker([{{ fall_data.latitude }}, {{ fall_data.longitude }}]).addTo(map)
+            .bindPopup('Your Location');
+
+        // Add markers for nearby hospitals
+        var hospitals = [
+            { name: 'Hospital A', lat: HOSPITAL_A_LAT, lon: HOSPITAL_A_LON },
+            { name: 'Hospital B', lat: HOSPITAL_B_LAT, lon: HOSPITAL_B_LON },
+            // Add more hospitals as needed
+        ];
+
+        hospitals.forEach(hospital => {
+            L.marker([hospital.lat, hospital.lon]).addTo(map)
+                .bindPopup(hospital.name);
+        });
+    </script> -->
+</body>
+
+</html>

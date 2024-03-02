@@ -8,9 +8,10 @@ from .views import emergency_contacts, add_emergency_contact,update_emergency_co
 app_name = 'falls'
 
 urlpatterns = [
-    path('', views.home, name='home'),
+    path('home/', views.home, name='home'),
     path('emergency-contacts/', emergency_contacts, name='emergency_contacts'),
     path('add-emergency-contact/', add_emergency_contact, name='add_emergency_contact'),
     path('update-emergency-contact/<int:pk>/', update_emergency_contact, name='update_emergency_contact'),
     path('delete-emergency-contact/<int:pk>/', delete_emergency_contact, name='delete_emergency_contact'),
 ]
+

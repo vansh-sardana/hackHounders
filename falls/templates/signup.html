@@ -1,24 +1,143 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sign Up</title>
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body class="w-100vw relative min-h-[100vh] overflow-x-hidden">
+    <nav class="bg-[#02042a] flex">
+        <div class="relative w-[1120px] mx-auto flex items-center justify-between font-mullish">
+            
+            <div class="flex">
+                <a href="{% url 'home' %}" class="cursor-pointer py-7 pr-7">
+                    <img src="../static/logo.png" alt="" class="w-[38px] h-[30px]">
+                </a>
+                <a href="{% url 'home' %}" class="cursor-pointer py-7 pr-7">
+                    <img src="../static/caretracker.png" alt="" class="w-[218px] h-[30px]">
+                </a>
+            </div>
+            <ul class="flex justify-between gap-6 h-[100%]">
+                <li class="text-white relative cursor-pointer group transition-all duration-200 group hover:text-[#2b84ea] flex flex-col justify-center h-[100%]">
+                    
+                    <a href="{% url 'emergency_contacts' %}">Emergency Contacts</a>
+                    <div class="absolute bottom-0 w-[100%] h-1 bg-[#2b84ea] hidden group-hover:block"></div>
+                </li>
+                <li class="text-white relative cursor-pointer group transition-all duration-200 group hover:text-[#2b84ea] flex flex-col justify-center h-[100%]">
+                    <a href="{% url 'nearby_hospitals' %}">Nearby Hospitals</a>
+                    <div class="absolute bottom-0 w-[100%] h-1 bg-[#2b84ea] hidden group-hover:block"></div>
+                </li>
+                
+            </ul>
+            <div class="flex gap-5 text-white">
+                {% if user.is_authenticated %}
+                <p>Welcome, {{ user.username }}! You are now logged in.</p>
+                
+                {% else %}
+                <button class="border-[#4b94ed] py-[12px] px-[20px] border rounded-sm text-sm font-bold">
+                    <a href="{% url 'login' %}">Log In</a>
+
+                </button>
+                <button
+                    class="py-[12px] px-4 border-[#4b94ed] border rounded-sm bg-white text-sm text-[#2b84ea] font-bold hover:text-[#0b72e7]">
+
+                    <a href="{% url 'signup' %}">
+                        Sign Up &rarr;
+                    </a>
+                </button>
+                {% endif %}
+            </div>
+        </div>
+    </nav>
+
+    <div class='flex max-w-[1160px] gap-x-12 w-11/12 m-auto py-12 justify-between items-center'>
+
+        <div class='w-11/12 max-w-[450px] bg-white p-8 rounded-lg shadow-md'>
+
+            <h2 class="text-3xl font-semibold text-[#02042a] mb-6">Sign Up</h2>
+
+            <form method="post" action="{% url 'signup' %}" class="space-y-4">
+                {% csrf_token %}
+
+                <div class="mb-4">
+                    <label for="id_username" class="sr-only">Username</label>
+                    <!-- Username field -->
+                    <input type="text" id="id_username" name="username" placeholder="Username"
+                        class="border border-gray-300 p-3 w-full rounded focus:outline-none focus:border-blue-500">
+                </div>
+
+                <div class="mb-4">
+                    <label for="id_email" class="sr-only">Email</label>
+                    <!-- Email field -->
+                    <input type="text" id="id_email" name="email" placeholder="Email"
+                        class="border border-gray-300 p-3 w-full rounded focus:outline-none focus:border-blue-500">
+                </div>
+
+                <div class="relative mb-4">
+                    <label for="id_password1" class="sr-only">Password</label>
+                    <!-- Password field -->
+                    <input type="password" id="id_password1" name="password1" placeholder="Password"
+                        class="border border-gray-300 p-3 w-full rounded focus:outline-none focus:border-blue-500">
+
+                    <!-- Eye icon to toggle between password visibility -->
+                    <span class="absolute top-1/2 -translate-y-1/2 right-4 cursor-pointer"
+                        onclick="togglePassword('id_password1')">
+                        <i class="fas fa-eye text-gray-500"></i>
+                    </span>
+                </div>
+
+                <div class="relative mb-4">
+                    <label for="id_password2" class="sr-only">Confirm Password</label>
+                    <!-- Confirm Password field -->
+                    <input type="password" id="id_password2" name="password2" placeholder="Confirm Password"
+                        class="border border-gray-300 p-3 w-full rounded focus:outline-none focus:border-blue-500">
+
+                    <!-- Eye icon to toggle between password visibility -->
+                    <span class="absolute top-1/2 -translate-y-1/2 right-4 cursor-pointer"
+                        onclick="togglePassword('id_password2')">
+                        <i class="fas fa-eye text-gray-500"></i>
+                    </span>
+                </div>
+
+                <div class="w-[100%] flex">
+                    <button type="submit"
+                        class=" bg-blue-500 text-white py-2 px-4 rounded-lg hover:bg-[#2b84ea] transition duration-300 mx-auto">
+                        Sign Up
+                    </button>
+                </div>
+            </form>
+
+            <p class="mt-4 text-[#02042a]">Already have an account? <a href="{% url 'login' %}"
+                                                                       class="text-blue-500">Log in here</a>.</p>
+            <div class="w-[100%]">
+                <button class=' bg-blue-600 flex justify-center items-center border border-white border-opacity-25 w-full rounded-md font-medium mt-6 px-4 py-2 gap-3 opacity-80 text-white mx-auto'>
+                    <p>Sign up with Google</p>
+                </button>
+            </div>
+        </div>
+        <div class='relative w-11/12 max-w-[450px]'>
+            <!-- <img src="../static/frame.png" alt="" width="555px" loading='lazy' class='z-10'/> -->
+            <img src="../static/doctor-shows-patient-how-use-application-maintain-health_130740-1813.avif" alt="" width="555px" loading='lazy' />
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/js/all.min.js" crossorigin="anonymous"></script>
     <script>
         function togglePassword(inputId) {
-            const passwordInput = document.getElementById(inputId);
-            passwordInput.type = (passwordInput.type === 'password') ? 'text' : 'password';
+            var x = document.getElementById(inputId);
+            if (x.type === "password") {
+                x.type = "text";
+            } else {
+                x.type = "password";
+            }
         }
     </script>
-</head>
-<body>
-    <h2>Sign Up</h2>
-    <form method="post" action="{% url 'signup' %}">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit">Sign Up</button>
-    </form>
-    <p>Already have an account? <a href="{% url 'login' %}">Login here</a>.</p>
+
 </body>
+
 </html>

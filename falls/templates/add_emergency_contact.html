@@ -5,26 +5,44 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Add Emergency Contact</title>
-   
+    <script src="https://cdn.tailwindcss.com"></script>
 </head>
 
 <body>
-    <h2>Add New Emergency Contact</h2>
+   <!-- falls/templates/add_emergency_contact.html -->
+<!-- falls/templates/add_emergency_contact.html -->
+<div class="max-w-md mx-auto mt-8 p-6 bg-white rounded-md shadow-md">
+    <h2 class="text-2xl font-semibold mb-4">Add New Emergency Contact</h2>
 
-    <form method="post" action="{% url 'add_emergency_contact' %}">
+    <form method="post" action="{% url 'add_emergency_contact' %}" class="grid grid-cols-1 gap-4">
         {% csrf_token %}
-        <label for="name">Name:</label>
-        <input type="text" id="name" name="name" required>
 
-        <label for="phone">Phone:</label>
-        <input type="text" id="phone" name="phone" required>
-        <label for="email">Email:</label>
-    <input type="text" id="email" name="email" required>
+        <div>
+            <label for="name" class="block text-sm font-medium text-gray-700">Name:</label>
+            <input type="text" id="name" name="name" required
+                   class="mt-1 p-2 w-full border rounded-md focus:outline-none focus:border-blue-500">
+        </div>
 
-        <button type="submit">Save Contact</button>
+        <div>
+            <label for="phone" class="block text-sm font-medium text-gray-700">Phone:</label>
+            <input type="text" id="phone" name="phone" required
+                   class="mt-1 p-2 w-full border rounded-md focus:outline-none focus:border-blue-500">
+        </div>
+
+        <div>
+            <label for="email" class="block text-sm font-medium text-gray-700">Email:</label>
+            <input type="text" id="email" name="email" required
+                   class="mt-1 p-2 w-full border rounded-md focus:outline-none focus:border-blue-500">
+        </div>
+
+        <button type="submit"
+                class="bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-[#2b84ea] transition duration-300">
+            Save Contact
+        </button>
     </form>
+</div>
 
-   
-</body>
+
+    </body>
 
 </html>
